@@ -9,4 +9,17 @@ description = "A personal AI research operating system."
 requires-python = ">=3.11"
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = [
+    ".",
+    "src",
+]
+include = [
+    "apps*",
+    "research_copilot*",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+    ".",
+    "src",
+]

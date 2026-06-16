@@ -1,10 +1,34 @@
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI
 
-from research_copilot.services.health_service import get_health_status
+from apps.api.routes.health import router as health_router
+from research_copilot.core.config import get_settings
+from research_copilot.core.logging import configure_logging, get_logger
 
-app = FastAPI(title="AI Research Copilot")
+
+settings = get_settings()
+configure_logging(settings.log_level)
+logger = get_logger(settings.app_name)
 
 
-@app.get("/health")
-def health() -> dict[str, str]:
-    return get_health_status()
+@asynccontextmanager
+async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    logger.info(
+        {
+            "message": "api_startup",
+            "service": settings.app_name,
+            "version": settings.app_version,
+            "environment": settings.app_env,
+        }
+    )
+    yield
+
+
+app = FastAPI(
+    title="AI Research Copilot",
+    version=settings.app_version,
+    lifespan=lifespan,
+)
+app.include_router(health_router)

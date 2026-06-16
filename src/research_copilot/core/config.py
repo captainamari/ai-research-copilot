@@ -3,9 +3,12 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+from research_copilot import __version__
+
 
 class Settings(BaseSettings):
     app_name: str = "ai-research-copilot"
+    app_version: str = __version__
     app_env: str = "development"
     log_level: str = "INFO"
     data_dir: Path = Path("data")
