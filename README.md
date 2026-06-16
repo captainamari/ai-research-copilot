@@ -78,6 +78,16 @@ Expected response:
 streamlit run apps/web/streamlit_app.py
 ```
 
+## Research OS Core Objects
+
+The MVP Research OS starts with five Pydantic schemas in `src/research_copilot/research_os/schemas.py`:
+
+- `ResearchQuestion`: the top-level question being investigated, with optional company/theme context and open/closed workflow status.
+- `Hypothesis`: a testable belief tied to a research question, including optional prior belief and expected evidence.
+- `ResearchSource`: an uploaded or indexed source document with file metadata, source quality, and primary-source flags.
+- `EvidenceItem`: a cited evidence chunk linked back to a research question, source, and optional hypothesis.
+- `ResearchLog`: a research activity record that captures the query, expectation, observation, belief updates, lessons, and next actions.
+
 ## Tests
 
 ```bash
