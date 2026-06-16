@@ -24,6 +24,16 @@ def test_research_question_can_be_initialized() -> None:
     assert question.updated_at is None
 
 
+def test_research_question_status_is_validated() -> None:
+    with pytest.raises(ValidationError):
+        ResearchQuestion(
+            id="rq-1",
+            title="Will ACME margins expand?",
+            status="paused",
+            created_at="2026-06-16T04:00:00Z",
+        )
+
+
 def test_hypothesis_can_be_initialized() -> None:
     hypothesis = Hypothesis(
         id="hyp-1",

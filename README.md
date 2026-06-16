@@ -8,7 +8,8 @@ The project is built in small phases. Each phase should keep the system runnable
 
 | Phase | Goal | Status |
 | --- | --- | --- |
-| Phase 0 | Project skeleton and development environment | In Progress |
+| Phase 0 | Project skeleton and development environment | Complete |
+| Phase 1 | Research Question API and local persistence | In Progress |
 
 ## Phase 0 Scope
 
@@ -69,6 +70,49 @@ Expected response:
   "status": "ok",
   "service": "ai-research-copilot",
   "version": "0.1.0"
+}
+```
+
+## Research Question API
+
+Research questions are the entry point for the research workflow. They are persisted through `LocalJSONStorage` in `data/storage/research_questions.json`.
+
+Create a research question:
+
+```text
+POST http://127.0.0.1:8000/research-questions
+```
+
+```json
+{
+  "title": "X-FAB 是否是 AI 时代被低估的特色工艺 fab？",
+  "description": "研究 X-FAB 是否受益于 AI 基础设施、特色工艺产能和光通信相关需求。",
+  "company": "X-FAB",
+  "theme": "AI infrastructure / specialty foundry"
+}
+```
+
+List research questions:
+
+```text
+GET http://127.0.0.1:8000/research-questions
+```
+
+Get one research question:
+
+```text
+GET http://127.0.0.1:8000/research-questions/{question_id}
+```
+
+Update research question status:
+
+```text
+PATCH http://127.0.0.1:8000/research-questions/{question_id}
+```
+
+```json
+{
+  "status": "closed"
 }
 ```
 
