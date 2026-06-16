@@ -1,7 +1,25 @@
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
+
+
+ResearchQuestionStatus = Literal["open", "closed"]
+
+
+class ResearchQuestionCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    title: str = Field(min_length=1)
+    description: str | None = None
+    company: str | None = None
+    theme: str | None = None
+
+
+class ResearchQuestionStatusUpdate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    status: ResearchQuestionStatus
 
 
 class ResearchQuestion(BaseModel):
@@ -10,7 +28,7 @@ class ResearchQuestion(BaseModel):
     description: str | None = None
     company: str | None = None
     theme: str | None = None
-    status: str = "open"
+    status: ResearchQuestionStatus = "open"
     created_at: str
     updated_at: str | None = None
 
