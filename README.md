@@ -67,7 +67,8 @@ Expected response:
 ```json
 {
   "status": "ok",
-  "service": "ai-research-copilot"
+  "service": "ai-research-copilot",
+  "version": "0.1.0"
 }
 ```
 
