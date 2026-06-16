@@ -88,6 +88,23 @@ The MVP Research OS starts with five Pydantic schemas in `src/research_copilot/r
 - `EvidenceItem`: a cited evidence chunk linked back to a research question, source, and optional hypothesis.
 - `ResearchLog`: a research activity record that captures the query, expectation, observation, belief updates, lessons, and next actions.
 
+## MVP Local Storage
+
+The MVP uses `LocalJSONStorage` in `src/research_copilot/research_os/storage.py` instead of a database. Business code should access Research OS records through this storage layer rather than reading or writing JSON files directly, so the implementation can later move to SQLite or PostgreSQL behind the same boundary.
+
+By default, records are stored in `data/storage/`, with one JSON file per object type:
+
+```text
+data/storage/
+├── research_questions.json
+├── hypotheses.json
+├── research_sources.json
+├── evidence_items.json
+└── research_logs.json
+```
+
+`LocalJSONStorage` supports saving a single record, retrieving by `id`, listing all records for a model, filtering by field equality, and updating a record by `id`. This is intentionally simple for Phase 0; concurrent writes, large JSON files, and advanced query patterns should be addressed when replacing the backend with a database.
+
 ## Tests
 
 ```bash
