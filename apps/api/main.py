@@ -4,6 +4,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from apps.api.routes.health import router as health_router
+from apps.api.routes.research_questions import router as research_questions_router
 from research_copilot.core.config import get_settings
 from research_copilot.core.logging import configure_logging, get_logger
 
@@ -32,3 +33,4 @@ app = FastAPI(
     lifespan=lifespan,
 )
 app.include_router(health_router)
+app.include_router(research_questions_router)
