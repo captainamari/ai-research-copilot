@@ -16,7 +16,7 @@ The project is built in small phases. Each phase should keep the system runnable
 Phase 0 creates the minimum maintainable Python project structure:
 
 - FastAPI entrypoint with a health check.
-- Streamlit entrypoint for the future web UI.
+- Streamlit entrypoint with a Research Questions page.
 - `src/` package layout for application code.
 - Basic configuration, logging, schema, and storage modules.
 - Local data, docs, and tests directories.
@@ -29,7 +29,9 @@ ai-research-copilot/
 │   ├── api/
 │   │   └── main.py
 │   └── web/
-│       └── streamlit_app.py
+│       ├── streamlit_app.py
+│       └── pages/
+│           └── 1_Research_Questions.py
 ├── src/
 │   └── research_copilot/
 │       ├── core/
@@ -115,12 +117,18 @@ PATCH http://127.0.0.1:8000/research-questions/{question_id}
   "status": "closed"
 }
 ```
-
 ## Run Web App
+
+Start the API first, then run Streamlit:
 
 ```bash
 streamlit run apps/web/streamlit_app.py
 ```
+
+The web app reads `API_BASE_URL` from the environment and defaults to `http://127.0.0.1:8000`.
+Use the Research Questions page in the sidebar to create questions, refresh the list, and confirm question status.
+
+Screenshot placeholder: add a screenshot of `apps/web/pages/1_Research_Questions.py` after running both services locally.
 
 ## Research OS Core Objects
 

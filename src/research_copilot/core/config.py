@@ -12,6 +12,7 @@ class Settings(BaseSettings):
     app_env: str = "development"
     log_level: str = "INFO"
     data_dir: Path = Path("data")
+    api_base_url: str = "http://127.0.0.1:8000"
 
     model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8")
 
