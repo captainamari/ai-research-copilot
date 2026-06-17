@@ -30,7 +30,8 @@ def main() -> None:
     settings = get_settings()
 
     st.set_page_config(page_title="Research Questions")
-    st.title("Research Questions")
+    st.title("AI Research Copilot")
+    st.header("Research Questions")
     st.caption(f"Phase 0 MVP | API: {settings.api_base_url}")
 
     with st.form("create_research_question", clear_on_submit=True):
